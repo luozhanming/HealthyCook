@@ -1,6 +1,7 @@
 package com.zhanming.healthycook.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhanming.healthycook.R;
+import com.zhanming.healthycook.recipes.RecipeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,10 +31,12 @@ public class CatalogueAdapter extends RecyclerView.Adapter<CatalogueAdapter.VH> 
             R.mipmap.man, R.mipmap.cancer};
 
     Context mContext;
+    MainContract.View mView;
 
 
-    public CatalogueAdapter(Context context) {
+    public CatalogueAdapter(Context context, MainContract.View view) {
         mContext = context;
+        mView = view;
         names = mContext.getResources().getStringArray(R.array.catalogueName);
     }
 
@@ -78,7 +82,7 @@ public class CatalogueAdapter extends RecyclerView.Adapter<CatalogueAdapter.VH> 
     private void performClick(int position) {
         switch (position) {
             case 0:
-
+                mView.jumpToPage(position);
                 break;
             case 1:
 

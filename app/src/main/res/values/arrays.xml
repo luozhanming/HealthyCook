@@ -11,4 +11,15 @@
         <item>男性</item>
         <item>抗癌</item>
     </string-array>
+
+    <string-array name="meiRongCatalogue">
+        <item>美颜</item>
+        <item>排毒</item>
+        <item>美容</item>
+        <item>抗皱</item>
+        <item>祛痘</item>
+        <item>润肤</item>
+        <item>保湿</item>
+    </string-array>
+
 </resources>

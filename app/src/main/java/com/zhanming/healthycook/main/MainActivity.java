@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
 import com.zhanming.healthycook.recipes.RecipeActivity;
+import com.zhanming.healthycook.recipes.RecipeListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(new CatalogueAdapter(this));
+        mRecyclerView.setAdapter(new CatalogueAdapter(this,this));
     }
 
     @Override
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     //扩展菜谱时修改这个
     @Override
     public void jumpToPage(int position) {
-        Intent intent = new Intent(this, RecipeActivity.class);
+        Intent intent = new Intent(this, RecipeListActivity.class);
         switch (position){
             case 0:intent.putExtra("what-recipe","meirong");break;
             case 1:intent.putExtra("what-recipe","jianfei");break;
@@ -108,5 +109,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             case 7:intent.putExtra("what-recipe","nanxing");break;
             case 8:intent.putExtra("what-recipe","kangai");break;
         }
+        this.startActivity(intent);
     }
 }
