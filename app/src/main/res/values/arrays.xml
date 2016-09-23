@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catalogueName">
+        <item>美容</item>
+        <item>减肥</item>
+        <item>保健养生</item>
+        <item>餐时</item>
+        <item>调养</item>
+        <item>肠胃消化</item>
+        <item>皮肤</item>
+        <item>男性</item>
+        <item>抗癌</item>
+    </string-array>
+</resources>
