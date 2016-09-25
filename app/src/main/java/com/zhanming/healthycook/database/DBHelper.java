@@ -11,10 +11,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DB_CATALOGUE = "catalogue.db";
 
-    public static final String TABLE_MEIRONG = "meiRong";
-    public static final String MEIRONG_ID = "id";
-    public static final String MEIRONG_NAME = "name";
-    public static final String MEIRONG_PAGE = "currentPage";
+    public static final String TABLE_CATALOGUE = "Catalogue";
+
+    public static final String FEILD_GROUP = "group";
+    public static final String FEILD_ID = "id";
+    public static final String FEILD_NAME = "name";
+    public static final String FEILD_PAGE = "currentPage";
+
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DB_CATALOGUE, null, 1);
@@ -22,10 +25,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_MEIRONG + " ( " +
-                MEIRONG_ID + " integer, " +
-                MEIRONG_NAME + " text, "
-                +MEIRONG_PAGE + " integer)");
+        db.execSQL("create table " + TABLE_CATALOGUE + " ( " +
+                FEILD_GROUP + " group, " +
+                FEILD_ID + " integer, " +
+                FEILD_NAME + " text, "
+                + FEILD_PAGE + " integer)");
     }
 
     @Override

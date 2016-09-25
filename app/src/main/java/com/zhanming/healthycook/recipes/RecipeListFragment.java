@@ -22,7 +22,9 @@ public class RecipeListFragment extends Fragment {
     @BindView(R.id.tv_page)
     TextView tv_page;
 
-    private String catalogueName;
+    //将这个参数传给Presenter，Presenter通过这个参数获取Catalogue
+    private String mCatalogueName;
+
 
     public RecipeListFragment(){
 

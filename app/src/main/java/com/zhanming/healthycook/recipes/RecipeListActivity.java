@@ -35,7 +35,7 @@ public class RecipeListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         meiRongCatalogues = getResources().getStringArray(R.array.meiRongCatalogue);
         //获取菜谱类别
-        String catalogue = getIntent().getStringExtra("what-recipe");
+        String catalogue = getIntent().getStringExtra("group");
         //获取此菜谱类别的PageManager
         initFragments();
     }
