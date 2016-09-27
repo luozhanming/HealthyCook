@@ -3,9 +3,9 @@ package com.zhanming.healthycook.recipes;
 /**
  * Created by zhanming on 2016/9/23.
  */
-public abstract class BaseRecipePresenter implements RecipesContract.Presenter {
+public abstract class RecipeListPresenter implements RecipesContract.Presenter {
 
-    private RecipesContract.View mView;
+    private RecipesContract.PageView mView;
 
 
     public abstract void loadInitialRecipe();

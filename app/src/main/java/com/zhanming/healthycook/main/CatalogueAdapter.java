@@ -14,10 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhanming.healthycook.R;
-import com.zhanming.healthycook.recipes.RecipeActivity;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by zhanming on 2016/9/22.
@@ -80,30 +76,7 @@ public class CatalogueAdapter extends RecyclerView.Adapter<CatalogueAdapter.VH> 
     }
 
     private void performClick(int position) {
-        switch (position) {
-            case 0:
-                mView.jumpToPage(position);
-                break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-
-                break;
-        }
+        mView.jumpToPage(position);
     }
 
     @Override

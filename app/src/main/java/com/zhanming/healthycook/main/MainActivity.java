@@ -16,8 +16,9 @@ import android.view.MenuItem;
 
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
-import com.zhanming.healthycook.recipes.RecipeActivity;
+import com.zhanming.healthycook.beans.Catalogue;
 import com.zhanming.healthycook.recipes.RecipeListActivity;
+import com.zhanming.healthycook.recipes.pagemanager.PageManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,15 +100,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void jumpToPage(int position) {
         Intent intent = new Intent(this, RecipeListActivity.class);
         switch (position){
-            case 0:intent.putExtra("what-recipe","meirong");break;
-            case 1:intent.putExtra("what-recipe","jianfei");break;
-            case 2:intent.putExtra("what-recipe","yangsheng");break;
-            case 3:intent.putExtra("what-recipe","canshi");break;
-            case 4:intent.putExtra("what-recipe","tiaoyang");break;
-            case 5:intent.putExtra("what-recipe","xiaohua");break;
-            case 6:intent.putExtra("what-recipe","pifu");break;
-            case 7:intent.putExtra("what-recipe","nanxing");break;
-            case 8:intent.putExtra("what-recipe","kangai");break;
+            case 0:intent.putExtra("group","MeiRong");break;
+            case 1:intent.putExtra("group","JianFei");break;
+            case 2:intent.putExtra("group","BaoJianYangSheng");break;
+            case 3:intent.putExtra("group","CanShi");break;
+            case 4:intent.putExtra("group","TiaoYang");break;
+            case 5:intent.putExtra("group","XiaoHua");break;
+            case 6:intent.putExtra("group","PiFu");break;
+            case 7:intent.putExtra("groupe","NanXing");break;
+            case 8:intent.putExtra("group","KangAi");break;
         }
         this.startActivity(intent);
     }

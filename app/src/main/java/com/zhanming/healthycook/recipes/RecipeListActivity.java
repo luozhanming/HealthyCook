@@ -16,39 +16,43 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeListActivity extends AppCompatActivity {
+public class RecipeListActivity extends AppCompatActivity implements RecipesContract.ActivityView {
 
     @BindView(R.id.stl_activity_recipe)
     SmartTabLayout mSmartTabLayout;
     @BindView(R.id.vp_activity_recipe_page)
     ViewPager mViewPage;
 
-    private BaseRecipePresenter mPresenter;
+    private RecipesContract.ActivityPresenter mPresenter;
 
     private List<Fragment> fragments;
-    private String[] meiRongCatalogues;
+    private String mClass;  //菜谱种类
+    private String[] mCatalogues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         ButterKnife.bind(this);
-        meiRongCatalogues = getResources().getStringArray(R.array.meiRongCatalogue);
-        //获取菜谱类别
         String catalogue = getIntent().getStringExtra("group");
-        //获取此菜谱类别的PageManager
-        initFragments();
+        mClass = catalogue;
+        new RecipeMainPresenter(this,this, mClass);
+        mPresenter.start();
     }
 
-    private void initFragments() {
+    @Override
+    public void initFragments(String[] catalogues) {
         FragmentPagerItems pages = new FragmentPagerItems(this);
-        for (String catalogue : meiRongCatalogues) {
+        for (String catalogue : catalogues) {
             pages.add(FragmentPagerItem.of(catalogue, RecipeListFragment.class));
-
         }
-        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(),pages);
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
         mViewPage.setAdapter(adapter);
         mSmartTabLayout.setViewPager(mViewPage);
+    }
 
+    @Override
+    public void setPresenter(RecipesContract.ActivityPresenter presenter) {
+        mPresenter = presenter;
     }
 }

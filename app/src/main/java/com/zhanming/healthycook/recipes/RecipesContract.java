@@ -7,7 +7,15 @@ import com.zhanming.healthycook.BaseView;
  * Created by zhanming on 2016/9/23.
  */
 public class RecipesContract {
-    interface View extends BaseView<Presenter> {
+
+    interface ActivityPresenter extends BasePresenter{
+
+    }
+    interface ActivityView extends BaseView<ActivityPresenter>{
+        void initFragments(String[] catalogues);
+    }
+
+    interface PageView extends BaseView<Presenter> {
         void showLoadingView();
 
         void hideLoadingView();

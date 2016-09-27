@@ -22,4 +22,20 @@
         <item>保湿</item>
     </string-array>
 
+    <string-array name="jianFeiCatalogue">
+        <item>瘦身</item>
+        <item>瘦脸</item>
+        <item>瘦腿</item>
+        <item>丰胸</item>
+    </string-array>
+
+    <string-array name="baoJianYangSheng">
+        <item>补血</item>
+        <item>润肺</item>
+        <item>养肝</item>
+        <item>补肾</item>
+        <item>健脾</item>
+        <item>降火</item>
+    </string-array>
+
 </resources>
