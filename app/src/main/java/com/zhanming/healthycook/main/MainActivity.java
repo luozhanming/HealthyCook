@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @BindView(R.id.rv_activity_main)
     RecyclerView mRecyclerView;
 
+    private String[] topCatalogues;
     private MainContract.Presenter mPresenter;
 
     @Override
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         initToolbar();
         initFloatingActionButton();
         initRecyclerView();
-
+        topCatalogues = getResources().getStringArray(R.array.catalogueName);
     }
 
     private void initToolbar() {
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(new CatalogueAdapter(this,this));
+        mRecyclerView.setAdapter(new CatalogueAdapter(this, this));
     }
 
     @Override
@@ -99,17 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void jumpToPage(int position) {
         Intent intent = new Intent(this, RecipeListActivity.class);
-        switch (position){
-            case 0:intent.putExtra("group","MeiRong");break;
-            case 1:intent.putExtra("group","JianFei");break;
-            case 2:intent.putExtra("group","BaoJianYangSheng");break;
-            case 3:intent.putExtra("group","CanShi");break;
-            case 4:intent.putExtra("group","TiaoYang");break;
-            case 5:intent.putExtra("group","XiaoHua");break;
-            case 6:intent.putExtra("group","PiFu");break;
-            case 7:intent.putExtra("groupe","NanXing");break;
-            case 8:intent.putExtra("group","KangAi");break;
-        }
+        intent.putExtra("group", topCatalogues[position]);
         this.startActivity(intent);
     }
 }

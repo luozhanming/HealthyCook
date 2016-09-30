@@ -27,7 +27,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
 
     private List<Fragment> fragments;
     private String mClass;  //菜谱种类
-    private String[] mCatalogues;
+    private String[] mCatalogues;  //此顶级种类中的下级种类
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +41,43 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.destroy();
+    }
+
+    @Override
     public void initFragments(String[] catalogues) {
         FragmentPagerItems pages = new FragmentPagerItems(this);
         for (String catalogue : catalogues) {
-            pages.add(FragmentPagerItem.of(catalogue, RecipeListFragment.class));
+            Bundle datas = new Bundle();
+            datas.putString("myCatalogue",catalogue);  //下层菜谱类
+            datas.putString("myClass",mClass);  //顶层菜谱类
+            pages.add(FragmentPagerItem.of(catalogue, RecipeListFragment.class,datas));
         }
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
         mViewPage.setAdapter(adapter);
         mSmartTabLayout.setViewPager(mViewPage);
+    }
+
+    @Override
+    public void showLoadingView() {
+
+    }
+
+    @Override
+    public void hideLoadingView() {
+
+    }
+
+    @Override
+    public void showRecipeList() {
+
+    }
+
+    @Override
+    public void jumpToDetail() {
+
     }
 
     @Override

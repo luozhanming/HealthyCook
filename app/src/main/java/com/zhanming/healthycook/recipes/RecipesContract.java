@@ -13,16 +13,18 @@ public class RecipesContract {
     }
     interface ActivityView extends BaseView<ActivityPresenter>{
         void initFragments(String[] catalogues);
-    }
 
-    interface PageView extends BaseView<Presenter> {
         void showLoadingView();
 
         void hideLoadingView();
 
-        void jumpToDetail();
-
         void showRecipeList();
+
+        void jumpToDetail();
+    }
+
+    interface PageView extends BaseView<Presenter> {
+
     }
 
     interface Presenter extends BasePresenter {

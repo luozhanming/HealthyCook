@@ -27,17 +27,17 @@ public class MyApplication extends Application {
         super.onCreate();
         mApplication = this;
         initImageLoader();
-        initCatalogueDB();
+        loadCatalogueDB2Cache();
     }
 
-    private void initCatalogueDB() {
+    private void loadCatalogueDB2Cache() {
         File file = new File(getCacheDir(),"catalogue.db");
         if(file.exists()){
             return;
         }
         try {
             InputStream is = getAssets().open("catalogue.db");
-            File cacheDir = getFilesDir();
+            File cacheDir = getCacheDir();
             FileOutputStream fos = new FileOutputStream(new File(cacheDir, "catalogue.db"));
             byte[] b = new byte[1024];
             int len = 0;

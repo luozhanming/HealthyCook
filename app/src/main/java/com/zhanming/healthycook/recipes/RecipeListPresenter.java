@@ -1,14 +1,29 @@
 package com.zhanming.healthycook.recipes;
 
+import android.content.Context;
+
+import com.zhanming.healthycook.beans.Catalogue;
+import com.zhanming.healthycook.recipes.pagemanager.PageManager;
+
 /**
  * Created by zhanming on 2016/9/23.
  */
-public abstract class RecipeListPresenter implements RecipesContract.Presenter {
+public class RecipeListPresenter implements RecipesContract.Presenter {
 
     private RecipesContract.PageView mView;
+    private Catalogue mCatalogue;
 
 
-    public abstract void loadInitialRecipe();
+
+    public RecipeListPresenter(Context context, RecipesContract.PageView view,String group, String calogue){
+        mView = view;
+        mCatalogue = PageManager.getInstance(context).getCatalogue(group,calogue);
+    }
+
+
+    public void loadInitialRecipe(){
+
+    };
 
     @Override
     public void loadMoreRecipesByPullDown() {
@@ -27,10 +42,7 @@ public abstract class RecipeListPresenter implements RecipesContract.Presenter {
 
     @Override
     public void start() {
-        mView.showLoadingView();
         loadInitialRecipe();
-        mView.hideLoadingView();
-        mView.showRecipeList();
     }
 
     @Override

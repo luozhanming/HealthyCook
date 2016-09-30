@@ -8,15 +8,14 @@
         <item>调养</item>
         <item>肠胃消化</item>
         <item>皮肤</item>
-        <item>男性</item>
-        <item>抗癌</item>
+        <item>人群</item>
+        <item>其他</item>
     </string-array>
 
     <string-array name="meiRongCatalogue">
         <item>美颜</item>
         <item>排毒</item>
-        <item>美容</item>
-        <item>抗皱</item>
+        <item>美白</item>
         <item>祛痘</item>
         <item>润肤</item>
         <item>保湿</item>
@@ -36,6 +35,50 @@
         <item>补肾</item>
         <item>健脾</item>
         <item>降火</item>
+    </string-array>
+
+    <string-array name="canShi">
+        <item>早餐</item>
+        <item>晚餐</item>
+        <item>夜宵</item>
+        <item>睡前</item>
+        <item>饭前</item>
+    </string-array>
+    <string-array name="tiaoYanG">
+        <item>经期</item>
+        <item>上火</item>
+        <item>肾虚</item>
+        <item>营养不良</item>
+        <item>肾阳虚</item>
+        <item>肾阴虚</item>
+    </string-array>
+    <string-array name="changWeiXiaoHua">
+        <item>便秘</item>
+        <item>肠炎</item>
+        <item>结肠炎</item>
+        <item>腹泻</item>
+    </string-array>
+
+    <string-array name="piFu">
+        <item>粗糙</item>
+        <item>干燥</item>
+        <item>瘙痒</item>
+        <item>雀斑</item>
+        <item>松弛</item>
+    </string-array>
+    <string-array name="renQun">
+        <item>宝宝</item>
+        <item>孕妇</item>
+        <item>产妇</item>
+        <item>老年人</item>
+
+    </string-array>
+    <string-array name="qiTa">
+        <item>近视</item>
+        <item>上火</item>
+        <item>水肿</item>
+        <item>痛风</item>
+        <item>解酒</item>
     </string-array>
 
 </resources>

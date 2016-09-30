@@ -13,26 +13,43 @@ import java.util.Map;
  */
 public class RecipeMainPresenter implements RecipesContract.ActivityPresenter {
 
-    private PageManager mPageManager;
     private RecipesContract.ActivityView mView;
     private Map<String, Catalogue> mCatalogues;
     private String[] mCatalogueName;
     private String mClass;
 
     public RecipeMainPresenter(Context context, RecipesContract.ActivityView view, String className) {
-        mPageManager = PageManager.getInstance(context);
-     //   mCatalogues = mPageManager.getLowCatalogues(className);
+        //   mCatalogues = mPageManager.getLowCatalogues(className);
         mView = view;
         mClass = className;
+        mCatalogues = PageManager.getInstance(context).getLowCatalogues(className);
         switch (mClass) {
-            case "MeiRong":
-                mCatalogueName = context.getResources().getStringArray(R.array.jianFeiCatalogue);
+            case "美容":
+                setCatalogueName(context,R.array.meiRongCatalogue);
                 break;
-            case "JianFei":
-                mCatalogueName = context.getResources().getStringArray(R.array.jianFeiCatalogue);
+            case "减肥":
+                setCatalogueName(context,R.array.jianFeiCatalogue);
                 break;
-            case "BaoJianYangSheng":
-                mCatalogueName = context.getResources().getStringArray(R.array.baoJianYangSheng);
+            case "保健养生":
+                setCatalogueName(context,R.array.baoJianYangSheng);
+                break;
+            case "餐时":
+                setCatalogueName(context,R.array.canShi);
+                break;
+            case "调养":
+                setCatalogueName(context,R.array.tiaoYanG);
+                break;
+            case "肠胃消化":
+                setCatalogueName(context,R.array.changWeiXiaoHua);
+                break;
+            case "皮肤":
+                setCatalogueName(context,R.array.piFu);
+                break;
+            case "人群":
+                setCatalogueName(context,R.array.renQun);
+                break;
+            case "其他":
+                setCatalogueName(context,R.array.qiTa);
                 break;
         }
         mView.setPresenter(this);
@@ -45,6 +62,10 @@ public class RecipeMainPresenter implements RecipesContract.ActivityPresenter {
 
     @Override
     public void destroy() {
+        mView = null;
+    }
 
+    private void setCatalogueName(Context context, int resId) {
+        mCatalogueName = context.getResources().getStringArray(resId);
     }
 }
