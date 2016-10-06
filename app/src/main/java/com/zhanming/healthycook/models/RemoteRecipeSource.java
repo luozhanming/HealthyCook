@@ -3,6 +3,8 @@ package com.zhanming.healthycook.models;
 import android.provider.CalendarContract;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -11,6 +13,8 @@ import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 import com.zhanming.healthycook.beans.Catalogue;
 import com.zhanming.healthycook.beans.Recipe;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -72,11 +76,9 @@ public class RemoteRecipeSource {
                 throw new Exception("Request code isn't 200!");
             }
             String body = response.body().string();
-            RecipeResponse result = gson.fromJson(body, RecipeResponse.class);
-            if (result.status != true) {
-                throw new Exception("The response result's status isn't true !");
-            }
-            Recipe[] recipes = gson.fromJson(result.tngou, Recipe[].class);
+            JSONObject jsonObj = new JSONObject(body);
+            String tngou = jsonObj.getString("tngou");
+            Recipe[] recipes = gson.fromJson(tngou, Recipe[].class);
             list = new ArrayList();
             for (Recipe recipe : recipes) {
                 list.add(recipe);
@@ -112,19 +114,17 @@ public class RemoteRecipeSource {
         StringBuilder sb = new StringBuilder();
         String requestStr = null;
         try {
-            requestStr = URLEncoder.encode(sb.append(BASE_URL_NAME)
-                    .append("?").append("name=").append(name).toString(), "utf-8");
+            requestStr = sb.append(BASE_URL_NAME)
+                    .append("?").append("name=").append(name).toString();
             Request request = new Request.Builder().url(requestStr)
                     .addHeader("apikey", "ef88432092c5c5e3db6654bc17a966fb")
                     .build();
             Response response = mClient.newCall(request).execute();
-            String responseString = response.body().string();
-            RecipeResponse recipeResponse = gson.fromJson(responseString, RecipeResponse.class);
-            if (recipeResponse.status != true) {
-                throw new Exception("The response result's status isn't true !");
-            }
+            String body = response.body().string();
+            JSONObject jsonObj = new JSONObject(body);
+            String tngou = jsonObj.getString("tngou");
             list = new ArrayList<>();
-            Recipe[] recipes = gson.fromJson(recipeResponse.tngou, Recipe[].class);
+            Recipe[] recipes = gson.fromJson(tngou, Recipe[].class);
             for (Recipe recipe : recipes) {
                 list.add(recipe);
             }
@@ -138,8 +138,11 @@ public class RemoteRecipeSource {
 
 
     private class RecipeResponse {
+        @SerializedName("status")
         boolean status;
+        @SerializedName("total")
         int total;
+        @SerializedName("tngou")
         String tngou;
     }
 

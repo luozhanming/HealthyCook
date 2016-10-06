@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -16,10 +15,8 @@ import android.view.MenuItem;
 
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
-import com.zhanming.healthycook.beans.Catalogue;
 import com.zhanming.healthycook.database.DBHelper;
 import com.zhanming.healthycook.recipes.RecipeListActivity;
-import com.zhanming.healthycook.recipes.pagemanager.PageManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         initFloatingActionButton();
         initRecyclerView();
         topCatalogues = getResources().getStringArray(R.array.catalogueName);
+        DBHelper helper = new DBHelper(this);
+        helper.getWritableDatabase();
     }
 
     private void initToolbar() {
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                         .setAction("Action", null).show();
             }
         });
-        DBHelper helper = new DBHelper(this);
     }
 
     private void initRecyclerView() {

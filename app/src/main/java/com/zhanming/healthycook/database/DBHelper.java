@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.zhanming.healthycook.utils.MyStringBuffer;
 
 /**
- * Created by zhanming on 2016/9/23.
+ * Created by zhanming on 2016/10/6.
  */
-public class DBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper{
 
     public static final String TABLE_CATALOGUE = "Catalogue";
     public static final String FEILD_GROUP = "_group";
@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db){
         MyStringBuffer msb = new MyStringBuffer();
         String createCollection = msb.appendWithSpace("create table").appendWithSpace(TABLE_COLLECTION)
                 .append("(")

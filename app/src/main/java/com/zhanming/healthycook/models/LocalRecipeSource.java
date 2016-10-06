@@ -41,6 +41,7 @@ public class LocalRecipeSource implements IRecipeSource {
             db.insert(DBHelper.TABLE_COLLECTION, null, values);
         }
         db.setTransactionSuccessful();
+        db.endTransaction();
         db.close();
         return true;
     }
@@ -61,6 +62,7 @@ public class LocalRecipeSource implements IRecipeSource {
         values.put(DBHelper.FEILD_COLLECTION_MSG, recipe.getMessage());
         db.insert(DBHelper.TABLE_COLLECTION, null, values);
         db.setTransactionSuccessful();
+        db.endTransaction();
         db.close();
         return true;
     }
