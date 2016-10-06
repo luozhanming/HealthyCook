@@ -17,11 +17,13 @@ import android.view.MenuItem;
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
 import com.zhanming.healthycook.beans.Catalogue;
+import com.zhanming.healthycook.database.DBHelper;
 import com.zhanming.healthycook.recipes.RecipeListActivity;
 import com.zhanming.healthycook.recipes.pagemanager.PageManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     FloatingActionButton fab;
     @BindView(R.id.rv_activity_main)
     RecyclerView mRecyclerView;
+    private Unbinder unbinder;
 
     private String[] topCatalogues;
     private MainContract.Presenter mPresenter;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initToolbar();
         initFloatingActionButton();
         initRecyclerView();
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                         .setAction("Action", null).show();
             }
         });
+        DBHelper helper = new DBHelper(this);
     }
 
     private void initRecyclerView() {

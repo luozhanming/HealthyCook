@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/item_backgroud"
+    android:id="@+id/rl_itemRoot"
+    android:layout_height="500dp">
+
+    <ImageView
+        android:id="@+id/iv_item_recipe"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tv_itemRecipe_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5454"
+        android:layout_alignTop="@+id/iv_item_recipe"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/iv_item_recipe"
+        android:layout_toRightOf="@+id/iv_item_recipe"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_itemRecipe_key"
+        android:layout_width="wrap_content"
+        android:text="5454"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_itemRecipe_name"
+        android:layout_alignStart="@+id/tv_itemRecipe_name"
+        android:layout_below="@+id/tv_itemRecipe_name"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="24sp" />
+
+</RelativeLayout>

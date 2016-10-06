@@ -3,15 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-   <android.support.v4.widget.SwipeRefreshLayout
-       android:id="@+id/srl_fragment_recipeList"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-       <android.support.v7.widget.RecyclerView
-           android:id="@+id/rv_fragment_recipeList"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-   </android.support.v4.widget.SwipeRefreshLayout>
+    <include layout="@layout/list"/>
+    <include layout="@layout/loading" />
 
 </RelativeLayout>

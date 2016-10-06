@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipesContract.ActivityView {
 
@@ -28,15 +29,17 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
     private List<Fragment> fragments;
     private String mClass;  //菜谱种类
     private String[] mCatalogues;  //此顶级种类中的下级种类
+    private Unbinder unbinder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         String catalogue = getIntent().getStringExtra("group");
         mClass = catalogue;
-        new RecipeMainPresenter(this,this, mClass);
+        new RecipeMainPresenter(this, this, mClass);
         mPresenter.start();
     }
 
@@ -44,6 +47,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.destroy();
+        unbinder.unbind();
     }
 
     @Override
@@ -51,34 +55,15 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
         FragmentPagerItems pages = new FragmentPagerItems(this);
         for (String catalogue : catalogues) {
             Bundle datas = new Bundle();
-            datas.putString("myCatalogue",catalogue);  //下层菜谱类
-            datas.putString("myClass",mClass);  //顶层菜谱类
-            pages.add(FragmentPagerItem.of(catalogue, RecipeListFragment.class,datas));
+            datas.putString("myCatalogue", catalogue);  //下层菜谱类
+            datas.putString("myClass", mClass);  //顶层菜谱类
+            pages.add(FragmentPagerItem.of(catalogue, RecipeListFragment.class, datas));
         }
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
         mViewPage.setAdapter(adapter);
         mSmartTabLayout.setViewPager(mViewPage);
     }
 
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
-
-    @Override
-    public void showRecipeList() {
-
-    }
-
-    @Override
-    public void jumpToDetail() {
-
-    }
 
     @Override
     public void setPresenter(RecipesContract.ActivityPresenter presenter) {

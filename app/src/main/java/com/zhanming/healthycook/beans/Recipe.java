@@ -3,32 +3,55 @@ package com.zhanming.healthycook.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.net.URLEncoder;
 
 /**
  * Created by zhanming on 2016/9/30.
  */
 public class Recipe implements Parcelable {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("img")
     private String imgUrl;
+    @SerializedName("description")
     private String description;
+    @SerializedName("keywords")
     private String key;
+    @SerializedName("message")
     private String message;
 
-    public Recipe(){
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", key='" + key + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
+    public Recipe() {
 
     }
 
-    public Recipe(Recipe r){
+    public Recipe(Recipe r) {
+        this.id = id;
         this.name = r.name;
         this.description = r.description;
         this.imgUrl = r.imgUrl;
-
         this.key = r.key;
         this.message = r.message;
     }
 
     protected Recipe(Parcel in) {
+        id = in.readString();
         name = in.readString();
         imgUrl = in.readString();
         description = in.readString();
@@ -47,6 +70,14 @@ public class Recipe implements Parcelable {
             return new Recipe[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -95,6 +126,7 @@ public class Recipe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
         parcel.writeString(name);
         parcel.writeString(imgUrl);
         parcel.writeString(description);

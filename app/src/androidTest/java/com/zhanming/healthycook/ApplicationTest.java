@@ -2,8 +2,12 @@ package com.zhanming.healthycook;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
+import android.util.Log;
 
 import com.zhanming.healthycook.beans.Catalogue;
+import com.zhanming.healthycook.beans.Recipe;
+import com.zhanming.healthycook.database.DBHelper;
+import com.zhanming.healthycook.models.RemoteRecipeSource;
 import com.zhanming.healthycook.recipes.pagemanager.PageManager;
 
 /**
@@ -12,10 +16,5 @@ import com.zhanming.healthycook.recipes.pagemanager.PageManager;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
-        PageManager manager = PageManager.getInstance(getContext());
-        Catalogue catalogue = manager.getCatalogue("MeiRong", "MeiYan");
-        catalogue.setPage(1);
-        manager.updateCataloguePage(catalogue);
-        Catalogue catalogue1 = manager.getCatalogue("MeiRong", "MeiYan");
     }
 }

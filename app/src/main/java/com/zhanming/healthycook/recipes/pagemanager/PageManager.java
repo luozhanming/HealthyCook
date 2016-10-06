@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public class PageManager implements IPageManager {
 
-    public static final int EACH_LOAD_PAGE_COUNT = 10;
     private static PageManager instance;
 
     public static final String KEY_YANGYAN = "MeiYan";
