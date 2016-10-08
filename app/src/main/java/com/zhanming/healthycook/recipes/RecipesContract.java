@@ -25,6 +25,12 @@ public class RecipesContract {
         void showRecipeList();
 
         void updateList(List<Recipe> recipes);
+
+        void showNoDatas();
+
+        void toggleRefreshing();
+
+        void showNoMoreDataView();
     }
 
     interface Presenter extends BasePresenter {
@@ -36,7 +42,5 @@ public class RecipesContract {
         //上拉加载更多数据
         void loadMoreRecipesByPullUp();
 
-        //换页
-        void changePage(int page);
     }
 }

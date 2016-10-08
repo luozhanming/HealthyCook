@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhanming.healthycook.R;
@@ -27,6 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 /**
  * Created by zhanming on 2016/9/23.
@@ -43,6 +45,8 @@ public class RecipeListFragment extends Fragment implements RecipesContract.Page
     SwipeRefreshLayout srl_refresh;
     @BindView(R.id.rl_loadingLayout)
     RelativeLayout rl_loadingLayout;
+    @BindView(R.id.rl_noDataLayout)
+    RelativeLayout rl_noDataLayout;
     private Unbinder unbinder;
 
 
@@ -51,6 +55,7 @@ public class RecipeListFragment extends Fragment implements RecipesContract.Page
     private String mCatalogueName;
     private RecipesContract.Presenter mPresenter;
     private ListAdapter mAdapter;
+    private boolean hasLoaded = false;
 
 
     public RecipeListFragment() {
@@ -74,12 +79,17 @@ public class RecipeListFragment extends Fragment implements RecipesContract.Page
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         rv_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-//        rv_list.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
-//                .margin(3)
-//                .build());
         mAdapter = new ListAdapter(mContext);
         rv_list.setAdapter(mAdapter);
+        srl_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.loadMoreRecipesByPullDown();
+            }
+        });
+        mPresenter.start();
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,14 +111,15 @@ public class RecipeListFragment extends Fragment implements RecipesContract.Page
     public void onResume() {
         super.onResume();
         Log.d(TAG, "--------------onResume: " + mCatalogueName + "-------------");
-        mPresenter.start();
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy: " + mCatalogueName);
         unbinder.unbind();
-
+        hasLoaded = false;
     }
 
     @Override
@@ -119,15 +130,43 @@ public class RecipeListFragment extends Fragment implements RecipesContract.Page
 
     @Override
     public void showLoadingView() {
+        if (rl_loadingLayout.getVisibility() == View.VISIBLE) {
+            return;
+        }
         rl_loadingLayout.setVisibility(View.VISIBLE);
         rl_rootList.setVisibility(View.GONE);
+        rl_noDataLayout.setVisibility(View.GONE);
 
     }
 
     @Override
     public void showRecipeList() {
+        if (rl_rootList.getVisibility() == View.VISIBLE) {
+            return;
+        }
         rl_rootList.setVisibility(View.VISIBLE);
         rl_loadingLayout.setVisibility(View.GONE);
+        rl_noDataLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoDatas() {
+        if (rl_noDataLayout.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        rl_rootList.setVisibility(View.GONE);
+        rl_loadingLayout.setVisibility(View.GONE);
+        rl_noDataLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void toggleRefreshing() {
+        srl_refresh.setRefreshing(!srl_refresh.isRefreshing());
+    }
+
+    @Override
+    public void showNoMoreDataView() {
+        Toast.makeText(mContext, "没有更多菜谱了！", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -15,12 +15,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer;
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.beans.Recipe;
 import com.zhanming.healthycook.detail.DetailActivity;
+import com.zhanming.healthycook.models.RemoteRecipeSource;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,7 +52,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.VH> {
 
     public ListAdapter(Context context) {
         mContext = context;
-        datas= new LinkedList<>();
+        datas = new LinkedList<>();
     }
 
     @Override
@@ -62,9 +64,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.VH> {
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         final Recipe recipe = datas.get(position);
-        String imgUrl = recipe.getImgUrl();
+        String imgUrl = "http://tnfs.tngou.net/img/" + recipe.getImgUrl();
         String name = recipe.getName();
         String key = recipe.getKey();
+        String description = recipe.getDescription();
+
         ImageLoader.getInstance().displayImage(imgUrl, holder.iv_img, options);
         holder.tv_name.setText(name);
         holder.tv_key.setText(key);
@@ -73,7 +77,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.VH> {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 Bundle extras = new Bundle();
-                extras.putParcelable("recipe",datas.get(position));
+
+                extras.putParcelable("recipe", datas.get(position));
                 intent.putExtras(extras);
                 mContext.startActivity(intent);
             }

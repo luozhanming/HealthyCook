@@ -17,10 +17,20 @@ import java.util.List;
 public class LocalRecipeSource implements IRecipeSource {
 
 
+    private static LocalRecipeSource instance;
     private DBHelper mHelper;
 
-    public LocalRecipeSource(Context context) {
+    private LocalRecipeSource(Context context) {
         mHelper = new DBHelper(context);
+    }
+
+    public static LocalRecipeSource getInstance(Context context) {
+        if (instance == null) {
+            synchronized (LocalRecipeSource.class) {
+                instance = new LocalRecipeSource(context);
+            }
+        }
+        return instance;
     }
 
     @Override

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/item_backgroud"
     android:id="@+id/rl_itemRoot"
+    android:fitsSystemWindows="true"
     android:layout_height="500dp">
 
     <ImageView
@@ -16,25 +17,25 @@
 
     <TextView
         android:id="@+id/tv_itemRecipe_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="5454"
         android:layout_alignTop="@+id/iv_item_recipe"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/iv_item_recipe"
         android:layout_toRightOf="@+id/iv_item_recipe"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_itemRecipe_key"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:text="5454"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv_itemRecipe_name"
         android:layout_alignStart="@+id/tv_itemRecipe_name"
         android:layout_below="@+id/tv_itemRecipe_name"
+        android:maxLines="2"
         android:ellipsize="end"
-        android:maxLines="1"
-        android:textSize="24sp" />
+        android:textSize="16sp" />
 
 </RelativeLayout>
