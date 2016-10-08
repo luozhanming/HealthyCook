@@ -11,7 +11,7 @@ public interface IRecipeSource {
     boolean addRecipes(List<Recipe> recipes);
     boolean addRecipe(Recipe recipe);
     boolean deleteRecipe(Recipe recipe);
-    boolean deleteRecipes(List<Recipe> recipes);
+    boolean deleteRecipes();
     List<Recipe> getRecipes();
     Recipe getRecipe(String name);
 

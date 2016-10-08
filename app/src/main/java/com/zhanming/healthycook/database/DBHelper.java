@@ -41,9 +41,8 @@ public class DBHelper extends SQLiteOpenHelper{
                 .appendWithSpace(FEILD_COLLECTION_KEYWORD).appendWithSpace("text,")
                 .appendWithSpace(FEILD_COLLECTION_IMG).appendWithSpace("text,")
                 .appendWithSpace(FEILD_COLLECTION_MSG).appendWithSpace("text").append(")")
-                .toString();
+                .string();
         db.execSQL(createCollection);
-
     }
 
     @Override

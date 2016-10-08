@@ -6,11 +6,16 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.zhanming.healthycook.beans.Recipe;
+import com.zhanming.healthycook.database.DBHelper;
+import com.zhanming.healthycook.models.LocalRecipeSource;
+import com.zhanming.healthycook.models.RemoteRecipeSource;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by zhanming on 2016/9/22.
@@ -26,12 +31,11 @@ public class MyApplication extends Application {
         mApplication = this;
         initImageLoader();
         loadCatalogueDB2Cache();
-
     }
 
     private void loadCatalogueDB2Cache() {
-        File file = new File(getCacheDir(),"catalogue.db");
-        if(file.exists()){
+        File file = new File(getCacheDir(), "catalogue.db");
+        if (file.exists()) {
             return;
         }
         try {

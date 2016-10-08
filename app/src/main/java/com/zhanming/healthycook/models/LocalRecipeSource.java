@@ -79,7 +79,7 @@ public class LocalRecipeSource implements IRecipeSource {
     }
 
     @Override
-    public boolean deleteRecipes(List<Recipe> recipes) {
+    public boolean deleteRecipes() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int deleteRow = db.delete(DBHelper.TABLE_COLLECTION, null, null);
         if (deleteRow > 0) {
