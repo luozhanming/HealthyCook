@@ -3,7 +3,6 @@ package com.zhanming.healthycook.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +16,7 @@ import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
 import com.zhanming.healthycook.database.DBHelper;
 import com.zhanming.healthycook.recipes.RecipeListActivity;
+import com.zhanming.healthycook.search.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,8 +60,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             @Override
             public void onClick(View view) {
                 //搜索功能
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+
             }
         });
     }

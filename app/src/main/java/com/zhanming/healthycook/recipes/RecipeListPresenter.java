@@ -40,30 +40,16 @@ public class RecipeListPresenter implements RecipesContract.Presenter {
         _getObserable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(_getObserver());
-    }
-
-    private Observer<List<Recipe>> _getObserver() {
-        return new Observer<List<Recipe>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<Recipe> recipes) {
-                if (recipes.size() == 0) {
-                    mView.showNoDatas();
-                }
-                mView.showRecipeList();
-                mView.updateList(recipes);
-            }
-        };
+                .subscribe(new Action1<List<Recipe>>() {
+                    @Override
+                    public void call(List<Recipe> recipes) {
+                        if (recipes.size() == 0) {
+                            mView.showNoDatas();
+                        }
+                        mView.showRecipeList();
+                        mView.updateList(recipes);
+                    }
+                });
     }
 
     private Observable<List<Recipe>> _getObserable() {

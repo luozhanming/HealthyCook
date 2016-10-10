@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhanming.healthycook.search.SearchActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:id="@+id/relativeLayout">
+
+        <ImageButton
+            android:id="@+id/ib_activity_search_back"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@color/colorPrimary"
+            android:src="@mipmap/back" />
+
+        <ImageButton
+            android:id="@+id/ib_activity_search_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:src="@mipmap/search"
+            android:visibility="visible"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+<com.zhanming.healthycook.customview.EditTextWithDel
+    android:id="@+id/et_activity_search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:layout_toEndOf="@+id/ib_activity_search_back"
+    android:layout_marginLeft="5dp"
+    android:maxLines="1"
+    android:layout_toRightOf="@+id/ib_activity_search_back" />
+
+    </RelativeLayout>
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/rl_activity_search"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@+id/relativeLayout"></android.support.v7.widget.RecyclerView>
+
+
+
+</RelativeLayout>

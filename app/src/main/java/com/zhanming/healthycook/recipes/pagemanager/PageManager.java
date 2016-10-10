@@ -99,7 +99,6 @@ public class PageManager implements IPageManager {
         topCatalogues.put("皮肤", lowCatalogues7);
         topCatalogues.put("人群", lowCatalogues8);
         topCatalogues.put("其他", lowCatalogues9);
-
         db.close();
     }
 

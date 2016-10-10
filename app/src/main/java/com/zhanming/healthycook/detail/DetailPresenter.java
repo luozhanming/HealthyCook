@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.zhanming.healthycook.beans.Recipe;
 import com.zhanming.healthycook.models.LocalRecipeSource;
@@ -35,7 +36,6 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void collectRecipe() {
         LocalRecipeSource.getInstance(mContext).addRecipe(mRecipe);
-
     }
 
     @Override
@@ -43,9 +43,14 @@ public class DetailPresenter implements DetailContract.Presenter {
         Bundle datas = mView.getViewDatas();
         mRecipe = datas.getParcelable("recipe");
         mView.setRecipeTitle(mRecipe.getName());
-        _getOberserable().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(_getOberser());
+        if (TextUtils.isEmpty(mRecipe.getMessage())) {
+            _getOberserable().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(_getOberser());
+            return;
+        }
+        mView.setRecipeImage("http://tnfs.tngou.net/img/" + mRecipe.getImgUrl());
+        mView.setRecipeContent(mRecipe.getMessage());
 
     }
 

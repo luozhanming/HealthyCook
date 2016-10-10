@@ -23,7 +23,6 @@
 
     <string-array name="jianFeiCatalogue">
         <item>瘦身</item>
-        <item>瘦脸</item>
         <item>瘦腿</item>
         <item>丰胸</item>
     </string-array>
@@ -64,7 +63,6 @@
         <item>干燥</item>
         <item>瘙痒</item>
         <item>雀斑</item>
-        <item>松弛</item>
     </string-array>
     <string-array name="renQun">
         <item>宝宝</item>
