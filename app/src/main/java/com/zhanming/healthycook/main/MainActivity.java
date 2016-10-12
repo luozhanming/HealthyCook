@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.BasePresenter;
+import com.zhanming.healthycook.collection.CollectionActivity;
 import com.zhanming.healthycook.database.DBHelper;
 import com.zhanming.healthycook.recipes.RecipeListActivity;
 import com.zhanming.healthycook.search.SearchActivity;
@@ -50,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         helper.getWritableDatabase();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
     private void initToolbar() {
         setSupportActionBar(toolbar);
         toolbar.setTitle("健康菜谱");
@@ -84,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         int id = item.getItemId();
         if (id == R.id.action_collection) {
-
+            Intent intent = new Intent(this, CollectionActivity.class);
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_shareApp) {
 

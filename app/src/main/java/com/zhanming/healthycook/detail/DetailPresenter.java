@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.beans.Recipe;
 import com.zhanming.healthycook.models.LocalRecipeSource;
 import com.zhanming.healthycook.models.RemoteRecipeSource;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Observer;
@@ -36,6 +40,10 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void collectRecipe() {
         LocalRecipeSource.getInstance(mContext).addRecipe(mRecipe);
+        Map<String,String> map = new HashMap<>();
+        map.put("菜谱名",mRecipe.getName());
+        map.put("菜谱Id",mRecipe.getId());
+        MobclickAgent.onEvent(mContext,"3",map);
     }
 
     @Override

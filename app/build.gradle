@@ -40,4 +40,6 @@ dependencies {
     compile 'com.jakewharton.timber:timber:2.4.2'
     compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
     compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile files('libs/YoumiSdk_v6.4.4_2016-09-08.jar')
 }

@@ -1,15 +1,20 @@
 package com.zhanming.healthycook;
 
 import android.app.Application;
+import android.os.Process;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.beans.Recipe;
 import com.zhanming.healthycook.database.DBHelper;
 import com.zhanming.healthycook.models.LocalRecipeSource;
 import com.zhanming.healthycook.models.RemoteRecipeSource;
+
+import net.youmi.android.AdManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,8 +34,11 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         initImageLoader();
+        AdManager.getInstance(this).init("e41a31db7493b24a","3eb2915113b92e46",true,true);
         loadCatalogueDB2Cache();
+
     }
 
     private void loadCatalogueDB2Cache() {
@@ -59,6 +67,8 @@ public class MyApplication extends Application {
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .diskCacheFileCount(25)
+                .memoryCache(new WeakMemoryCache())
+                .memoryCacheSize((int) (Runtime.getRuntime().maxMemory()/8))
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .build();
         ImageLoader.getInstance().init(config);

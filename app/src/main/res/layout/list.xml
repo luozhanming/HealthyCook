@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     android:id="@+id/rl_rootList"
-    android:visibility="gone"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_fragment_recipeList"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_fragment_recipeList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_fragment_recipeList_pullUpLoading"
+        android:background="#d7daca"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_alignBottom="@id/srl_fragment_recipeList"
+        android:layout_height="40dp">
+
+        <ProgressBar
+            android:layout_marginLeft="100dp"
+            android:layout_gravity="center"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="加载更多......"
+            android:textSize="20sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </RelativeLayout>

@@ -11,10 +11,11 @@ import java.util.List;
  */
 public class RecipesContract {
 
-    interface ActivityPresenter extends BasePresenter{
+    interface ActivityPresenter extends BasePresenter {
 
     }
-    interface ActivityView extends BaseView<ActivityPresenter>{
+
+    interface ActivityView extends BaseView<ActivityPresenter> {
         void initFragments(String[] catalogues);
 
     }
@@ -24,13 +25,17 @@ public class RecipesContract {
 
         void showRecipeList();
 
-        void updateList(List<Recipe> recipes);
+        void updateList(List<Recipe> recipes, boolean isUp);
 
         void showNoDatas();
 
         void toggleRefreshing();
 
         void showNoMoreDataView();
+
+        void togglePullUpLoadingView();
+
+        void showTopRecipe();
     }
 
     interface Presenter extends BasePresenter {

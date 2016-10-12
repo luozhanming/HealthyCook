@@ -3,7 +3,11 @@
     package="com.zhanming.healthycook">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".MyApplication"
@@ -34,7 +38,40 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".search.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".collection.CollectionActivity"
+            android:label="收藏" />
+
+        <!-- 有米广告 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false"></service>
+
+        <receiver android:name="net.youmi.android.AdReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57fdddfe67e58ec3f700012a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="360" />
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="goapk" />
+
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>

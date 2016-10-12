@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.R;
 
 import butterknife.BindView;
@@ -41,6 +42,18 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         initView();
         new DetailPresenter(this, this);
         mPresenter.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override

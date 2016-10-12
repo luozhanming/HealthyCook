@@ -31,7 +31,7 @@ public class RemoteRecipeSource {
     public static final String BASE_URL_LIST = "http://apis.baidu.com/tngou/cook/list";
     public static final String BASE_URL_DETAIL = "http://apis.baidu.com/tngou/cook/show";
     public static final String BASE_URL_NAME = "http://apis.baidu.com/tngou/cook/name";
-    public static final int DEFAULT_PAGE_COUNT = 10;
+    public static final int DEFAULT_PAGE_COUNT = 7;
     private static RemoteRecipeSource instance;
 
     private OkHttpClient mClient;

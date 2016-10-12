@@ -1,38 +1,33 @@
 package com.zhanming.healthycook.search;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.text.TextUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 
-import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.R;
 import com.zhanming.healthycook.beans.Recipe;
 import com.zhanming.healthycook.customview.EditTextWithDel;
 import com.zhanming.healthycook.recipes.ListAdapter;
 
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Subscription;
-import rx.functions.Func1;
+import butterknife.Unbinder;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchContract.View, TextWatcher {
+
+    private static final String TAG = "SearchActivity";
 
     @BindView(R.id.ib_activity_search_back)
     ImageButton ib_back;
@@ -44,18 +39,41 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView rl_list;
 
     private ListAdapter mAdapter;
-    private Subscription searchSubscription;
+    private SearchContract.Presenter mPresenter;
+    private Unbinder unbinder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initView();
-
+        new SearchPresenter(this, this);
+        mPresenter.start();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "---------------onDestroy:----------- ");
+        unbinder.unbind();
+        mPresenter.destroy();
+        mPresenter = null;
+        mAdapter = null;
+    }
 
     private void initView() {
         et_search.setOnDelClickCallback(new EditTextWithDel.DelClickCallback() {
@@ -85,9 +103,12 @@ public class SearchActivity extends AppCompatActivity {
                 view.startAnimation(aa1);
             }
         });
+        //设置RecyclerView视图
         mAdapter = new ListAdapter(this);
-        rl_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        rl_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rl_list.setAdapter(mAdapter);
+        //设置EditText视图
+        et_search.addTextChangedListener(this);
 
     }
 
@@ -122,4 +143,41 @@ public class SearchActivity extends AppCompatActivity {
         ib_search.startAnimation(aa1);
     }
 
+    @Override
+    public String getSearchText() {
+        return et_search.getText().toString();
+    }
+
+    @Override
+    public void showSearchResult(List<Recipe> result) {
+        mAdapter.addMoreDatasToTop(result);
+    }
+
+    @Override
+    public void showSearchNoResult() {
+
+    }
+
+    @Override
+    public void setPresenter(SearchContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.toString().length() > 0) {
+            mAdapter.cleanDatas();
+            mPresenter.actionSearchSubscription(s.toString());
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

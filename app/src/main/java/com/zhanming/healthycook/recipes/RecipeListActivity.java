@@ -9,6 +9,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
+import com.umeng.analytics.MobclickAgent;
 import com.zhanming.healthycook.R;
 
 import java.util.List;
@@ -41,6 +42,18 @@ public class RecipeListActivity extends AppCompatActivity implements RecipesCont
         mClass = catalogue;
         new RecipeMainPresenter(this, this, mClass);
         mPresenter.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
